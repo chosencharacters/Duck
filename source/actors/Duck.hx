@@ -46,6 +46,8 @@ class Duck extends FlxSpriteExt
 
 		sstate("normal");
 
+		Lists.setFlagBool("ARMOR_DASH", true);
+
 		PlayState.self.ducks.add(this);
 		PlayState.self.miscBack.add(coin_collect_hitbox);
 	}
@@ -55,7 +57,6 @@ class Duck extends FlxSpriteExt
 		touching_floor = isTouching(FlxObject.FLOOR);
 		hit_stun ? drag.set(100, 100) : drag.set(200, 100);
 		maxVelocity.set(speed);
-
 		switch (state)
 		{
 			case "normal":

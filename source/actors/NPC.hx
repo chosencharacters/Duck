@@ -51,6 +51,8 @@ class NPC extends FlxSpriteExt
 				return "Exit Duck: This is the village exit. You alright dude? You look a little... scared.";
 			case "blacksmith":
 				return "Quacksmith: Unlock new abilities with better armor here. Ye must collect coins first.";
+			case "bread_npc":
+				return "Mal: That bread gives me the creeps. It used to be delicious... now it hurts :(";
 			default:
 				return "";
 		}

@@ -6,9 +6,11 @@ class FlyingToast extends FlxSpriteExt
 
 	var speed:Int = -50;
 
+	var org:FlxPoint;
+
 	public function new(?X:Float = 0, ?Y:Float = 0)
 	{
-		super(X - 20 - 26, Y);
+		super(X, Y);
 
 		drag.x = 100;
 
@@ -17,11 +19,13 @@ class FlyingToast extends FlxSpriteExt
 		sstate("normal");
 
 		PlayState.self.enemies.add(this);
+
+		org = new FlxPoint(x, y);
 	}
 
 	override function update(elapsed:Float)
 	{
-		if (!visible || !isOnScreen())
+		if (state != "wait-respawn" && (!visible || !isOnScreen()))
 			return;
 
 		switch (state)
@@ -60,7 +64,17 @@ class FlyingToast extends FlxSpriteExt
 					explosion.loadAllFromAnimationSet("enemy-boom");
 					PlayState.self.miscFront.add(explosion);
 					PlayState.self.hitStop = 5;
+					sstate("wait-respawn");
+				}
+			case "wait-respawn":
+				velocity.set(0, 0);
+				acceleration.set(0, 0);
+				visible = false;
+				setPosition(org.x, org.y);
+				if (!isOnScreen())
+				{
 					kill();
+					new FlyingToast(org.x, org.y);
 				}
 		}
 

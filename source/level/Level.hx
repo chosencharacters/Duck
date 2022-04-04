@@ -53,9 +53,9 @@ class Level extends LDTKLevel
 			new NPC(entity.pixelX + x, entity.pixelY + y, entity.f_name);
 		for (entity in entities.all_Upgrade.iterator())
 			new Upgrade(entity.pixelX + x, entity.pixelY + y);
-		for (entity in entities.all_Upgrade.iterator())
+		for (entity in entities.all_Toast.iterator())
 			new Toast(entity.pixelX + x, entity.pixelY + y);
-		for (entity in entities.all_Upgrade.iterator())
+		for (entity in entities.all_FlyingToast.iterator())
 			new FlyingToast(entity.pixelX + x, entity.pixelY + y);
 	}
 
