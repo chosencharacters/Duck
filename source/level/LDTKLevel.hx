@@ -1,10 +1,9 @@
 package level;
 
-import flixel.addons.tile.FlxTilemapExt;
 import flixel.tile.FlxTilemap;
 import items.Coin;
 
-class LDTKLevel extends FlxTilemapExt
+class LDTKLevel extends FlxTilemap
 {
 	public static var project:LdtkProject = new LdtkProject();
 
@@ -15,7 +14,7 @@ class LDTKLevel extends FlxTilemapExt
 	var array_len:Int = 0;
 
 	public var col_map:Array<Int> = [];
-	public var col:FlxTilemapExt;
+	public var col:FlxTilemap;
 
 	public function new(level_name:String, graphic:String, layer_name:String, tile_size:Int = 16)
 	{
@@ -58,14 +57,21 @@ class LDTKLevel extends FlxTilemapExt
 
 		col = new FlxTilemapExt();
 
-		col.loadMapFromArray(col_map, lvl_width, lvl_height, AssetPaths.collision__png, tile_size, tile_size);
+		col.loadMapFromArray(col_map, lvl_width, lvl_height, AssetPaths.village__png, tile_size, tile_size);
 		col.setTileProperties(1, FlxObject.NONE);
 		col.setTileProperties(2, FlxObject.ANY);
 		col.setTileProperties(3, FlxObject.UP);
 		col.setTileProperties(4, FlxObject.NONE);
 		col.setTileProperties(5, FlxObject.NONE);
 		col.setTileProperties(8, FlxObject.NONE);
-		col.setSlopes([6], [7]);
+		col.setTileProperties(6, FlxObject.ANY);
+		col.setTileProperties(7, FlxObject.ANY);
+		col.setTileProperties(8, FlxObject.ANY);
+		col.setTileProperties(9, FlxObject.NONE);
+		col.setTileProperties(10, FlxObject.NONE);
+		col.setTileProperties(11, FlxObject.NONE);
+
+		// col.setSlopes([6], [7]);
 
 		for (c in 0...col_map.length)
 		{

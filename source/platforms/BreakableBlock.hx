@@ -13,7 +13,7 @@ import flixel.util.FlxColor;
 class BreakableBlock extends FlxSpriteExt
 {
 	var lvl:Level;
-	var col:FlxTilemapExt;
+	var col:FlxTilemap;
 
 	public function new(?X:Float = 0, ?Y:Float = 0, source:Int)
 	{
@@ -61,6 +61,8 @@ class BreakableBlock extends FlxSpriteExt
 		f.allowCollisions = FlxObject.ANY;
 		f.start(true);
 		PlayState.self.emitters.add(f);
+		if (y >= 400)
+			lvl.setTile(Math.floor((x - col.x) / 16), Math.floor((y - col.y) / 16), 25);
 		kill();
 	}
 }

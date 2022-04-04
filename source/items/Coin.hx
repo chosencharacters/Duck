@@ -3,10 +3,12 @@ package items;
 class Coin extends FlxSpriteExt
 {
 	var collected:Bool = false;
+	var value:Int = 0;
 
 	public function new(?X:Float = 0, ?Y:Float = 0, value:Int = 0)
 	{
 		super(X + 4, Y + 3);
+		this.value = value;
 		switch (value)
 		{
 			case 1:
@@ -36,7 +38,7 @@ class Coin extends FlxSpriteExt
 	{
 		anim("collect");
 		collected = true;
-		PlayState.self.coins_collected++;
+		PlayState.self.coins_collected += value;
 		PlayState.self.coin_counter.collect();
 	}
 }

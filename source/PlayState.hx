@@ -18,7 +18,7 @@ class PlayState extends FlxState
 	public static var self:PlayState;
 
 	public var lvls:FlxTypedGroup<Level> = new FlxTypedGroup<Level>();
-	public var cols:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+	public var cols:FlxTypedGroup<FlxTilemap> = new FlxTypedGroup<FlxTilemap>();
 
 	public var ducks:FlxTypedGroup<Duck> = new FlxTypedGroup<Duck>();
 	public var coins:FlxTypedGroup<Coin> = new FlxTypedGroup<Coin>();
@@ -59,6 +59,7 @@ class PlayState extends FlxState
 
 		for (lvl in lvls)
 			FlxG.camera.maxScrollX = lvl.x + lvl.width > FlxG.camera.maxScrollX ? lvl.x + lvl.width : FlxG.camera.maxScrollX;
+		FlxG.camera.minScrollX = 0;
 
 		FlxG.camera.follow(ducks.getFirstAlive());
 		FlxG.camera.targetOffset.set(0, -32);
@@ -67,7 +68,7 @@ class PlayState extends FlxState
 
 		cols.visible = false;
 
-		bgs.add(new FlxBackdrop(AssetPaths.background_1__png, 0.5, 0.5, true, false));
+		bgs.add(new FlxBackdrop(AssetPaths.background_1__png, 0.5, 0.1, true, false));
 		add(bgs);
 		add(cols);
 		add(lvls);
@@ -95,7 +96,7 @@ class PlayState extends FlxState
 
 		Ctrl.update();
 		FlxG.collide(cols, ducks);
-		FlxG.collide(npcs, cols);
+		//FlxG.collide(npcs, cols);
 		FlxG.collide(enemies, cols);
 
 		super.update(elapsed);

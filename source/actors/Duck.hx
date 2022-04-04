@@ -47,6 +47,8 @@ class Duck extends FlxSpriteExt
 		sstate("normal");
 
 		Lists.setFlagBool("ARMOR_DASH", true);
+		Lists.setFlagBool("ARMOR_GROUNDPOUND", true);
+		Lists.setFlagBool("ARMOR_SPIKES", true);
 
 		PlayState.self.ducks.add(this);
 		PlayState.self.miscBack.add(coin_collect_hitbox);

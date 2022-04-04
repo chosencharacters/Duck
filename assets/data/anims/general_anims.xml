@@ -110,6 +110,10 @@
 		<anim name = "idle">0t4</anim>
 	</animSet>
 
+	<animSet image = "shopkeeper" path = "assets\images\npcs">
+		<anim name = "idle">0t4</anim>
+	</animSet>
+
 	<animSet image = "generic_duck" path = "assets\images\npcs">
 		<anim name = "idle">0t4</anim>
 	</animSet>

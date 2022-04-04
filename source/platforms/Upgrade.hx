@@ -2,7 +2,7 @@ package platforms;
 
 class Upgrade extends FlxSpriteExt
 {
-	var costs:Array<Int> = [1, 2, 3, 4];
+	var costs:Array<Int> = [10, 50, 150, 600];
 	var upgrade_level:Int = 0;
 
 	var talk_cd:Int = 0;

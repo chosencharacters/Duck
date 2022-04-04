@@ -53,6 +53,10 @@ class NPC extends FlxSpriteExt
 				return "Quacksmith: Unlock new abilities with better armor here. Ye must collect coins first.";
 			case "bread_npc":
 				return "Mal: That bread gives me the creeps. It used to be delicious... now it hurts :(";
+			case "dash_duck":
+				return "Dashy: You can dash diagonal by holding up while dashing.";
+			case "shopkeeper":
+				return "Duckshu: On second thought, I should've opened my Nothing Shop somewhere else.";
 			default:
 				return "";
 		}
