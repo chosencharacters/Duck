@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<root>
+	<animSet image = "duck" path = "assets\images">
+		<anim name = "idle">0t4</anim>
+		<anim name = "move">5t11</anim>
+		<anim name = "jump">7</anim>
+		<anim name = "hit" looping = "false">12t14</anim>
+		<anim name = "sit">15</anim>
+		<anim name = "ground_pound" looping = "false">16t17</anim>
+		<anim name = "ground_pound_land" looping = "false">18t20</anim>
+	</animSet>
+
+	<animSet image = "coin" path = "assets\images">
+		<anim name = "idle">0t5</anim>
+	</animSet>
+
+	<animSet image = "spike" path = "assets\images">
+		<anim name = "idle">0</anim>
+	</animSet>
+</root>
+
+<!---->
