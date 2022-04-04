@@ -50,6 +50,8 @@ class NPC extends FlxSpriteExt
 				return nurse_quips();
 			case "exit_duck":
 				return "Exit Duck: This is the village exit. You alright dude? You look a little... scared.";
+			case "blacksmith":
+				return "Quacksmith: Unlock new abilities with better armor here. Ye must collect coins first.";
 			default:
 				return "";
 		}

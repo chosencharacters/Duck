@@ -17,13 +17,14 @@ class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 	var state:String = "";
 	var tick:Int = 0;
 
+	var important_playing:Bool = false;
+
 	public function new(?X:Float = 0, ?Y:Float = 0)
 	{
 		super(X, Y);
 		bg = new FlxSpriteExt(AssetPaths.dialogue__png);
-		text = new FlxText(9, 152 - 2, 302);
-		text.color = 0xff503737;
-		// text = Utils.formatText(text, "left", FlxColor.BLACK, false, "assets/fonts/Silverling.ttf");
+		text = new FlxText(9, 152 - 6, 302);
+		text = Utils.formatText(text, "left", 0xff503737, false, "assets/fonts/RetroMedievalV3.ttf", 16);
 
 		add(bg);
 		add(text);
@@ -60,6 +61,7 @@ class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 				offset.y -= 5;
 				if (offset.y <= -FlxG.height / 4)
 				{
+					important_playing = false;
 					visible = false;
 					state = "";
 				}
@@ -67,8 +69,12 @@ class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 		super.update(elapsed);
 	}
 
-	public function load_text(new_text:String)
+	public function load_text(new_text:String, important:Bool = false)
 	{
+		if (!important && important_playing)
+			return;
+		if (important)
+			important_playing = true;
 		loaded_text = new_text;
 		index = 0;
 		state = "in";

@@ -51,6 +51,8 @@ class Level extends LDTKLevel
 			new Bonfire(entity.pixelX + x, entity.pixelY + y);
 		for (entity in entities.all_NPC.iterator())
 			new NPC(entity.pixelX + x, entity.pixelY + y, entity.f_name);
+		for (entity in entities.all_Upgrade.iterator())
+			new Upgrade(entity.pixelX + x, entity.pixelY + y);
 	}
 
 	static function first_to_lowercase(s:String):String

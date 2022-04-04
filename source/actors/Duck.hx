@@ -48,10 +48,6 @@ class Duck extends FlxSpriteExt
 
 		PlayState.self.ducks.add(this);
 		PlayState.self.miscBack.add(coin_collect_hitbox);
-
-		Lists.setFlagBool("ARMOR_DASH", true);
-		// Lists.setFlagBool("ARMOR_SPIKES", true);
-		Lists.setFlagBool("ARMOR_GROUNDPOUND", true);
 	}
 
 	override function update(elapsed:Float)
@@ -114,18 +110,13 @@ class Duck extends FlxSpriteExt
 		hit_stun = true;
 	}
 
-	function upgrade()
+	public function recolor(tier:Int)
 	{
-		if (Lists.getFlagBool("ARMOR_GROUNDPOUND"))
-		{
-			color = FlxColor.BLUE;
-			return;
-		}
-		if (Lists.getFlagBool("ARMOR_SPIKES"))
-		{
-			color = FlxColor.RED;
-			return;
-		}
+		var save_anim:String = animation.name;
+		loadAllFromAnimationSet("duck_t" + tier);
+		setSize(11, 22);
+		offset.set(5, 2);
+		anim(save_anim);
 	}
 
 	function explode()
@@ -174,7 +165,7 @@ class Duck extends FlxSpriteExt
 			sstateAnim("ground_pound");
 			return;
 		}
-		if (DASH)
+		if (DASH && dashable)
 		{
 			dash_reset = false;
 			dash_up = UP;

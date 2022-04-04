@@ -10,6 +10,7 @@ import level.Level;
 import openfl.display.StageQuality;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import ui.CoinCounter;
 import ui.Dialogue;
 
 class PlayState extends FlxState
@@ -31,6 +32,7 @@ class PlayState extends FlxState
 	public var npcs:FlxTypedGroup<NPC> = new FlxTypedGroup<NPC>();
 
 	public var dlg:Dialogue;
+	public var coin_counter:CoinCounter;
 
 	public var coins_collected:Int = 0;
 
@@ -77,6 +79,7 @@ class PlayState extends FlxState
 		add(miscFront);
 		add(emitters);
 		add(dlg = new Dialogue());
+		add(coin_counter = new CoinCounter());
 
 		bgColor = 0xff87CEEB;
 	}

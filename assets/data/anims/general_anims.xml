@@ -10,9 +10,74 @@
 		<anim name = "ground_pound" looping = "false">16t17</anim>
 		<anim name = "ground_pound_land" looping = "false">18t20</anim>
 		<anim name = "dash" looping = "false" fps = "14">21t28</anim>
+		<anim name = "nope" looping = "false">29t36</anim>
 	</animSet>
 
-	<animSet image = "coin" path = "assets\images\platforms">
+	<animSet image = "duck_t0" path = "assets\images\ducks">
+		<anim name = "idle">0t4</anim>
+		<anim name = "move">5t11</anim>
+		<anim name = "jump">7</anim>
+		<anim name = "hit" looping = "false">12t14</anim>
+		<anim name = "sit">15</anim>
+		<anim name = "ground_pound" looping = "false">16t17</anim>
+		<anim name = "ground_pound_land" looping = "false">18t20</anim>
+		<anim name = "dash" looping = "false" fps = "14">21t28</anim>
+		<anim name = "nope" looping = "false">29t36</anim>
+	</animSet>
+
+	<animSet image = "duck_t1" path = "assets\images\ducks">
+		<anim name = "idle">0t4</anim>
+		<anim name = "move">5t11</anim>
+		<anim name = "jump">7</anim>
+		<anim name = "hit" looping = "false">12t14</anim>
+		<anim name = "sit">15</anim>
+		<anim name = "ground_pound" looping = "false">16t17</anim>
+		<anim name = "ground_pound_land" looping = "false">18t20</anim>
+		<anim name = "dash" looping = "false" fps = "14">21t28</anim>
+		<anim name = "nope" looping = "false">29t36</anim>
+	</animSet>
+
+	<animSet image = "duck_t2" path = "assets\images\ducks">
+		<anim name = "idle">0t4</anim>
+		<anim name = "move">5t11</anim>
+		<anim name = "jump">7</anim>
+		<anim name = "hit" looping = "false">12t14</anim>
+		<anim name = "sit">15</anim>
+		<anim name = "ground_pound" looping = "false">16t17</anim>
+		<anim name = "ground_pound_land" looping = "false">18t20</anim>
+		<anim name = "dash" looping = "false" fps = "14">21t28</anim>
+		<anim name = "nope" looping = "false">29t36</anim>
+	</animSet>
+
+	<animSet image = "duck_t3" path = "assets\images\ducks">
+		<anim name = "idle">0t4</anim>
+		<anim name = "move">5t11</anim>
+		<anim name = "jump">7</anim>
+		<anim name = "hit" looping = "false">12t14</anim>
+		<anim name = "sit">15</anim>
+		<anim name = "ground_pound" looping = "false">16t17</anim>
+		<anim name = "ground_pound_land" looping = "false">18t20</anim>
+		<anim name = "dash" looping = "false" fps = "14">21t28</anim>
+		<anim name = "nope" looping = "false">29t36</anim>
+	</animSet>
+
+	<animSet image = "coin_gold" path = "assets\images\platforms">
+		<anim name = "idle">0t5</anim>
+		<anim name = "collect" looping = "false">6t8</anim>
+		<anim name = "spin_once" looping = "false" fps = "20">0t5,0</anim>
+	</animSet>
+
+	<animSet image = "coin_silver" path = "assets\images\platforms">
+		<anim name = "idle">0t5</anim>
+		<anim name = "collect" looping = "false">6t8</anim>
+	</animSet>
+
+	<animSet image = "coin_green" path = "assets\images\platforms">
+		<anim name = "idle">0t5</anim>
+		<anim name = "collect" looping = "false">6t8</anim>
+	</animSet>
+
+	<animSet image = "coin_pink" path = "assets\images\platforms">
 		<anim name = "idle">0t5</anim>
 		<anim name = "collect" looping = "false">6t8</anim>
 	</animSet>
@@ -26,11 +91,22 @@
 		<anim name = "active">1t4</anim>
 	</animSet>
 
+	<animSet image = "armor-upgrade" path = "assets\images\platforms">
+		<anim name = "t0">0t4</anim>
+		<anim name = "t1">5t9</anim>
+		<anim name = "t2">10t14</anim>
+		<anim name = "t3">15t19</anim>
+	</animSet>
+
 	<animSet image = "nurse_duck" path = "assets\images\npcs">
 		<anim name = "idle">0t5</anim>
 	</animSet>
 
 	<animSet image = "rad_duck" path = "assets\images\npcs">
+		<anim name = "idle">0t4</anim>
+	</animSet>
+
+	<animSet image = "blacksmith" path = "assets\images\npcs">
 		<anim name = "idle">0t4</anim>
 	</animSet>
 

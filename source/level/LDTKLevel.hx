@@ -70,7 +70,13 @@ class LDTKLevel extends FlxTilemapExt
 		for (c in 0...col_map.length)
 		{
 			if (col_map[c] == 4)
-				PlayState.self.coins.add(new Coin(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y));
+				PlayState.self.coins.add(new Coin(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y, 1));
+			if (col_map[c] == 9)
+				PlayState.self.coins.add(new Coin(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y, 5));
+			if (col_map[c] == 10)
+				PlayState.self.coins.add(new Coin(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y, 10));
+			if (col_map[c] == 11)
+				PlayState.self.coins.add(new Coin(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y, 25));
 			if (col_map[c] == 5)
 				PlayState.self.spikes.add(new Spike(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y));
 			if (col_map[c] == 8)

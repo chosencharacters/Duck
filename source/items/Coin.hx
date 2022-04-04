@@ -4,10 +4,20 @@ class Coin extends FlxSpriteExt
 {
 	var collected:Bool = false;
 
-	public function new(?X:Float = 0, ?Y:Float = 0)
+	public function new(?X:Float = 0, ?Y:Float = 0, value:Int = 0)
 	{
 		super(X + 4, Y + 3);
-		loadAllFromAnimationSet("coin");
+		switch (value)
+		{
+			case 1:
+				loadAllFromAnimationSet("coin_silver");
+			case 5:
+				loadAllFromAnimationSet("coin_gold");
+			case 10:
+				loadAllFromAnimationSet("coin_green");
+			case 25:
+				loadAllFromAnimationSet("coin_pink");
+		}
 	}
 
 	override function update(elapsed:Float)
@@ -27,5 +37,6 @@ class Coin extends FlxSpriteExt
 		anim("collect");
 		collected = true;
 		PlayState.self.coins_collected++;
+		PlayState.self.coin_counter.collect();
 	}
 }

@@ -22,7 +22,7 @@ class FlxSpriteExt extends FlxSprite
 	var state:String = "";
 
 	/**simple tick**/
-	var tick:Int = 0;
+	public var tick:Int = 0;
 
 	/**Previous frame of animation**/
 	var prevFrame:Int = 0;
@@ -192,7 +192,7 @@ class FlxSpriteExt extends FlxSprite
 		anim(s);
 	}
 
-	function ttick()
+	public function ttick()
 	{
 		tick++;
 	}

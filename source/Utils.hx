@@ -200,14 +200,14 @@ class Utils
 	public static function formatText(text:FlxText, alignment:String = "left", color:Int = FlxColor.WHITE, outline:Bool = false, ?font_path:String,
 			?font_size:Int):FlxText
 	{
-		var font:String = font_path != null ? "assets/fonts/Silverling.ttf" : font_path;
+		var font:String = font_path != null ? font_path : "assets/fonts/Silverling.ttf";
 		var font_size:Int = font_size != null ? font_size : 16;
 
 		if (outline)
-			text.setFormat(font, font_size, color, alignment, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.setFormat(font, font_size, color, alignment, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		else
 			text.setFormat(font, font_size, color, alignment);
-
+		trace(font);
 		#if flash
 		text.x += 1;
 		text.y += 1;

@@ -20,7 +20,6 @@ class BreakableBlock extends FlxSpriteExt
 		super(X, Y);
 		loadGraphic(AssetPaths.village__png, true, 16, 16);
 		animation.frameIndex = source;
-		color = FlxColor.YELLOW;
 
 		for (l in PlayState.self.lvls)
 			if (x >= l.x && x <= l.x + l.width && y >= l.y && y <= l.y + l.height)
