@@ -7,13 +7,25 @@ class Duck extends FlxSpriteExt
 	var speed_rate:Int = 15;
 	var jumpBoom:Int = 100;
 	var jump_run_rate:Float = 1.25;
+	var dash_speed:Int = 125;
 
 	var touching_floor:Bool = false;
 
-	var hit_stun:Bool = false;
+	public var hit_stun:Bool = false;
 
+	public var dashable:Bool = false;
 	public var spike_immunity:Bool = false;
-	public var ground_poundable:Bool = true;
+	public var ground_poundable:Bool = false;
+
+	public var dash_reset:Bool = false;
+
+	var dash_up:Bool = false;
+
+	public static var active_bonfire:Bonfire;
+
+	var explosion:TempSprite;
+
+	public var coin_collect_hitbox:FlxSpriteExt;
 
 	public function new(?X:Float = 0, ?Y:Float = 0)
 	{
@@ -25,14 +37,20 @@ class Duck extends FlxSpriteExt
 		drag.set(200, 100);
 		maxVelocity.set(speed);
 
-		setSize(11, 23);
-		offset.set(5, 1);
+		coin_collect_hitbox = new FlxSpriteExt();
+		coin_collect_hitbox.makeGraphic(Math.floor(width), Math.floor(height) + 4);
+		coin_collect_hitbox.visible = false;
+
+		setSize(11, 22);
+		offset.set(5, 2);
 
 		sstate("normal");
 
 		PlayState.self.ducks.add(this);
+		PlayState.self.miscBack.add(coin_collect_hitbox);
 
-		Lists.setFlagBool("ARMOR_SPIKES", true);
+		Lists.setFlagBool("ARMOR_DASH", true);
+		// Lists.setFlagBool("ARMOR_SPIKES", true);
 		Lists.setFlagBool("ARMOR_GROUNDPOUND", true);
 	}
 
@@ -40,6 +58,7 @@ class Duck extends FlxSpriteExt
 	{
 		touching_floor = isTouching(FlxObject.FLOOR);
 		hit_stun ? drag.set(100, 100) : drag.set(200, 100);
+		maxVelocity.set(speed);
 
 		switch (state)
 		{
@@ -49,8 +68,10 @@ class Duck extends FlxSpriteExt
 				animProtect("hit");
 				if (touching_floor && animation.finished)
 				{
-					sstate("normal");
-					hit_stun = false;
+					explode();
+					sstate("exploding");
+					// sstate("normal");
+					// hit_stun = false;
 				}
 			case "ground_pound":
 				trail_effect();
@@ -63,16 +84,28 @@ class Duck extends FlxSpriteExt
 			case "ground_pound_land":
 				if (animation.finished)
 					sstate("normal");
+			case "dash":
+				trail_effect();
+				maxVelocity.set(dash_speed);
+				velocity.x = !flipX ? dash_speed : -dash_speed;
+				velocity.y = dash_up ? -dash_speed / 2 : 0;
+				animProtect("dash");
+				if (animation.finished)
+					sstate("normal");
 		}
 
+		dashable = Lists.getFlagBool("ARMOR_DASH");
 		ground_poundable = Lists.getFlagBool("ARMOR_GROUNDPOUND");
 		spike_immunity = Lists.getFlagBool("ARMOR_SPIKES");
 
+		coin_collect_hitbox.setPosition(x - offset.x, y - offset.y);
 		super.update(elapsed);
 	}
 
 	public function hit(origin:FlxPoint)
 	{
+		if (hit_stun)
+			return;
 		Utils.shake("damage");
 		sstateAnim("hit");
 		PlayState.self.hitStop = 5;
@@ -95,20 +128,61 @@ class Duck extends FlxSpriteExt
 		}
 	}
 
+	function explode()
+	{
+		explosion = new TempSprite(x - 30, y - 17);
+		explosion.loadAllFromAnimationSet("explosion");
+		explosion.anim("explode");
+		PlayState.self.miscFront.add(explosion);
+
+		explosion.on_update = function()
+		{
+			if (explosion.animation.frameIndex == 2)
+				Utils.shake("groundpound");
+			if (explosion.animation.frameIndex == 3)
+				visible = false;
+		}
+
+		explosion.on_end = function()
+		{
+			FlxG.camera.flash(0);
+			PlayState.self.active_bonfire.respawn();
+			visible = true;
+			sstate("normal");
+			hit_stun = false;
+		}
+	}
+
 	function control()
 	{
+		var JUMPING:Bool = !touching_floor;
+
 		var RIGHT:Bool = Ctrl.right[p];
 		var LEFT:Bool = Ctrl.left[p];
 		var JUMP:Bool = Ctrl.jjump[p];
 		var DOWN:Bool = Ctrl.down[p];
+		var UP:Bool = Ctrl.up[p];
 		var GROUND_POUND:Bool = DOWN && JUMP && !touching_floor;
+		var DASH:Bool = JUMPING && JUMP && !GROUND_POUND && dash_reset;
 		var SIT:Bool = DOWN && touching_floor;
 
-		var JUMPING:Bool = !touching_floor;
+		if (touching_floor)
+			dash_reset = true;
 
 		if (GROUND_POUND && ground_poundable)
 		{
 			sstateAnim("ground_pound");
+			return;
+		}
+		if (DASH)
+		{
+			dash_reset = false;
+			dash_up = UP;
+			sstateAnim("dash");
+			if (LEFT)
+				flipX = true;
+			if (RIGHT)
+				flipX = false;
 			return;
 		}
 		if (RIGHT && !SIT)
@@ -155,14 +229,29 @@ class Duck extends FlxSpriteExt
 			mirror.stamp(this);
 
 			rainbowEffect++;
-			switch (rainbowEffect % 3)
+			if (state == "dash")
 			{
-				case 0:
-					mirror.color = FlxColor.BLUE.getDarkened(.5);
-				case 1:
-					mirror.color = FlxColor.MAGENTA.getDarkened(.5);
-				case 2:
-					mirror.color = FlxColor.MAGENTA;
+				switch (rainbowEffect % 3)
+				{
+					case 0:
+						mirror.color = FlxColor.BLUE;
+					case 1:
+						mirror.color = FlxColor.CYAN.getDarkened(0.5);
+					case 2:
+						mirror.color = FlxColor.PURPLE;
+				}
+			}
+			else
+			{
+				switch (rainbowEffect % 3)
+				{
+					case 0:
+						mirror.color = FlxColor.BLUE.getDarkened(.5);
+					case 1:
+						mirror.color = FlxColor.MAGENTA.getDarkened(.5);
+					case 2:
+						mirror.color = FlxColor.MAGENTA;
+				}
 			}
 
 			var to_remove:Array<TempSprite> = [];
@@ -170,7 +259,7 @@ class Duck extends FlxSpriteExt
 			for (t in trail)
 			{
 				if (black_trail_mode)
-					t.color = FlxColor.MAGENTA.getDarkened(.8);
+					t.color = state == "dash" ? FlxColor.CYAN.getDarkened(.8) : FlxColor.MAGENTA.getDarkened(.8);
 				if (!t.alive)
 					to_remove.push(t);
 			}

@@ -36,6 +36,7 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
+	<assets path = "assets/fonts" include="*" embed="true"/>
 
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />

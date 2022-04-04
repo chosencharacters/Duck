@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <root>
-	<animSet image = "duck" path = "assets\images">
+	<animSet image = "duck" path = "assets\images\ducks">
 		<anim name = "idle">0t4</anim>
 		<anim name = "move">5t11</anim>
 		<anim name = "jump">7</anim>
@@ -9,14 +9,37 @@
 		<anim name = "sit">15</anim>
 		<anim name = "ground_pound" looping = "false">16t17</anim>
 		<anim name = "ground_pound_land" looping = "false">18t20</anim>
+		<anim name = "dash" looping = "false" fps = "14">21t28</anim>
 	</animSet>
 
-	<animSet image = "coin" path = "assets\images">
+	<animSet image = "coin" path = "assets\images\platforms">
+		<anim name = "idle">0t5</anim>
+		<anim name = "collect" looping = "false">6t8</anim>
+	</animSet>
+
+	<animSet image = "spike" path = "assets\images\platforms">
+		<anim name = "idle">0</anim>
+	</animSet>
+
+	<animSet image = "bonfire" path = "assets\images\platforms">
+		<anim name = "inactive">0</anim>
+		<anim name = "active">1t4</anim>
+	</animSet>
+
+	<animSet image = "nurse_duck" path = "assets\images\npcs">
 		<anim name = "idle">0t5</anim>
 	</animSet>
 
-	<animSet image = "spike" path = "assets\images">
-		<anim name = "idle">0</anim>
+	<animSet image = "rad_duck" path = "assets\images\npcs">
+		<anim name = "idle">0t4</anim>
+	</animSet>
+
+	<animSet image = "generic_duck" path = "assets\images\npcs">
+		<anim name = "idle">0t4</anim>
+	</animSet>
+
+	<animSet image = "explosion" path = "assets\images\fx">
+		<anim name = "explode" looping = "false">0t11</anim>
 	</animSet>
 </root>
 

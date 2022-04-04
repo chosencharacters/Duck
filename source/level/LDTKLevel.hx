@@ -33,7 +33,6 @@ class LDTKLevel extends FlxTilemapExt
 
 		lvl_width = layer.cWid;
 		lvl_height = layer.cHei;
-
 		var int_grid:Array<Int> = [];
 
 		for (x in 0...lvl_width)
@@ -76,7 +75,7 @@ class LDTKLevel extends FlxTilemapExt
 				PlayState.self.spikes.add(new Spike(getTileCoordsByIndex(c, false).x, getTileCoordsByIndex(c, false).y));
 			if (col_map[c] == 8)
 			{
-				new BreakableBlock(col.getTileCoordsByIndex(c, false).x, col.getTileCoordsByIndex(c, false).y, getTileByIndex(c));
+				new BreakableBlock(col.getTileCoordsByIndex(c, false).x + x, col.getTileCoordsByIndex(c, false).y + y, getTileByIndex(c));
 				col_map[c] = 2;
 			}
 		}

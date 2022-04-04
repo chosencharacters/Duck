@@ -3,6 +3,7 @@ import LdtkProject;
 import Lists;
 import PlayState;
 import Xml;
+import actors.*;
 import actors.Duck;
 import flixel.FlxG;
 import flixel.FlxObject;

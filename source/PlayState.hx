@@ -10,6 +10,7 @@ import level.Level;
 import openfl.display.StageQuality;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import ui.Dialogue;
 
 class PlayState extends FlxState
 {
@@ -25,12 +26,16 @@ class PlayState extends FlxState
 	public var miscBack:FlxTypedGroup<FlxSpriteExt> = new FlxTypedGroup<FlxSpriteExt>();
 	public var miscFront:FlxTypedGroup<FlxSpriteExt> = new FlxTypedGroup<FlxSpriteExt>();
 	public var emitters:FlxTypedGroup<FlxEmitter> = new FlxTypedGroup<FlxEmitter>();
+	public var bonfires:FlxTypedGroup<Bonfire> = new FlxTypedGroup<Bonfire>();
 
-	static var coins_collected:Int = 0;
+	public var npcs:FlxTypedGroup<NPC> = new FlxTypedGroup<NPC>();
 
-	var num_levels:Int = 2;
+	public var dlg:Dialogue;
+
+	public var coins_collected:Int = 0;
 
 	public var hitStop:Int = 0;
+	public var active_bonfire:Bonfire;
 
 	var bgs:FlxTypedGroup<FlxBackdrop> = new FlxTypedGroup<FlxBackdrop>();
 
@@ -44,25 +49,34 @@ class PlayState extends FlxState
 		FlxG.game.stage.quality = StageQuality.LOW;
 		FlxG.camera.pixelPerfectRender = true;
 
-		//add(new FlxText(0, 0, 0, "Duck Safe", 32).screenCenter());
+		// add(new FlxText(0, 0, 0, "Duck Safe", 32).screenCenter());
 
-		for (num in 0...num_levels)
+		for (num in 0...LDTKLevel.project.levels.length)
 			new Level('Level_${num}', AssetPaths.village__png, "Tiles");
+
+		for (lvl in lvls)
+			FlxG.camera.maxScrollX = lvl.x + lvl.width > FlxG.camera.maxScrollX ? lvl.x + lvl.width : FlxG.camera.maxScrollX;
 
 		FlxG.camera.follow(ducks.getFirstAlive());
 		FlxG.camera.targetOffset.set(0, -32);
 
 		FlxG.worldBounds.set(9999, 9999);
 
-		bgs.add(new FlxBackdrop(AssetPaths.background_1__png, 0.5, 0, true));
+		cols.visible = false;
+
+		bgs.add(new FlxBackdrop(AssetPaths.background_1__png, 0.5, 0.5, true, false));
 		add(bgs);
+		add(cols);
 		add(lvls);
 		add(miscBack);
 		add(spikes);
+		add(npcs);
+		add(bonfires);
 		add(ducks);
 		add(coins);
 		add(miscFront);
 		add(emitters);
+		add(dlg = new Dialogue());
 
 		bgColor = 0xff87CEEB;
 	}
@@ -75,8 +89,10 @@ class PlayState extends FlxState
 		hitstop_manager();
 
 		Ctrl.update();
-		super.update(elapsed);
 		FlxG.collide(cols, ducks);
+		FlxG.collide(npcs, cols);
+
+		super.update(elapsed);
 	}
 
 	function hitstop_manager()

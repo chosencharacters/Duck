@@ -2,24 +2,30 @@ package items;
 
 class Coin extends FlxSpriteExt
 {
+	var collected:Bool = false;
+
 	public function new(?X:Float = 0, ?Y:Float = 0)
 	{
-		super(X, Y);
+		super(X + 4, Y + 3);
 		loadAllFromAnimationSet("coin");
-		setSize(8, 10);
-		offset.set(5, 3);
 	}
 
 	override function update(elapsed:Float)
 	{
-		for (d in PlayState.self.ducks)
-			if (d.overlaps(this))
-				collect();
+		if (!collected)
+			for (d in PlayState.self.ducks)
+				if (d.coin_collect_hitbox.overlaps(this))
+					collect();
+		if (animation.name == "collect" && animation.finished)
+			kill();
+
 		super.update(elapsed);
 	}
 
 	function collect()
 	{
-		kill();
+		anim("collect");
+		collected = true;
+		PlayState.self.coins_collected++;
 	}
 }

@@ -1,5 +1,7 @@
 package platforms;
 
+import ldtk.Entity;
+
 class Spike extends FlxSpriteExt
 {
 	public function new(?X:Float = 0, ?Y:Float = 0)

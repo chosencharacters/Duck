@@ -12,6 +12,9 @@ class TempSprite extends FlxSpriteExt
 {
 	var tickSet:Int = 0;
 
+	public var on_end:Void->Void;
+	public var on_update:Void->Void;
+
 	public function new(?X:Float = 0, ?Y:Float = 0, tickSET:Int = 0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
@@ -23,9 +26,13 @@ class TempSprite extends FlxSpriteExt
 	{
 		trailUpdate();
 		tick--;
+		if (on_update != null)
+			on_update();
 		if (animation.finished && tickSet <= 0 || tick <= 0 && tickSet > 0)
 		{
 			kill();
+			if (on_end != null)
+				on_end();
 		}
 		super.update(elapsed);
 	}

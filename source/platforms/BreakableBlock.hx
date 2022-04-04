@@ -20,6 +20,7 @@ class BreakableBlock extends FlxSpriteExt
 		super(X, Y);
 		loadGraphic(AssetPaths.village__png, true, 16, 16);
 		animation.frameIndex = source;
+		color = FlxColor.YELLOW;
 
 		for (l in PlayState.self.lvls)
 			if (x >= l.x && x <= l.x + l.width && y >= l.y && y <= l.y + l.height)
@@ -27,17 +28,18 @@ class BreakableBlock extends FlxSpriteExt
 		col = lvl.col;
 
 		col.setTile(Math.floor((x - col.x) / 16), Math.floor((y - col.y) / 16), 2);
+		immovable = true;
 
 		PlayState.self.miscFront.add(this);
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		FlxG.overlap(this, PlayState.self.ducks, function(f:FlxSprite, d:Duck)
-		{
-			if (d.state == "ground_pound")
+		for (d in PlayState.self.ducks)
+			if (FlxG.overlap(d.coin_collect_hitbox, this) && d.state == "ground_pound")
 				shatter();
-		});
+			else
+				FlxG.collide(d, this);
 		super.update(elapsed);
 	}
 

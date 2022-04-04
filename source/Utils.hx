@@ -200,8 +200,8 @@ class Utils
 	public static function formatText(text:FlxText, alignment:String = "left", color:Int = FlxColor.WHITE, outline:Bool = false, ?font_path:String,
 			?font_size:Int):FlxText
 	{
-		var font:String = font_path != null ? "assets/fonts/6px-Normal.ttf" : font_path;
-		var font_size:Int = font_size != null ? font_size : 36;
+		var font:String = font_path != null ? "assets/fonts/Silverling.ttf" : font_path;
+		var font_size:Int = font_size != null ? font_size : 16;
 
 		if (outline)
 			text.setFormat(font, font_size, color, alignment, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

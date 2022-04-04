@@ -47,6 +47,10 @@ class Level extends LDTKLevel
 
 		for (entity in entities.all_Duck.iterator())
 			new Duck(entity.pixelX + x, entity.pixelY + y);
+		for (entity in entities.all_Bonfire.iterator())
+			new Bonfire(entity.pixelX + x, entity.pixelY + y);
+		for (entity in entities.all_NPC.iterator())
+			new NPC(entity.pixelX + x, entity.pixelY + y, entity.f_name);
 	}
 
 	static function first_to_lowercase(s:String):String
