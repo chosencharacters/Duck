@@ -30,6 +30,7 @@ class PlayState extends FlxState
 	public var bonfires:FlxTypedGroup<Bonfire> = new FlxTypedGroup<Bonfire>();
 
 	public var npcs:FlxTypedGroup<NPC> = new FlxTypedGroup<NPC>();
+	public var enemies:FlxTypedGroup<FlxSpriteExt> = new FlxTypedGroup<FlxSpriteExt>();
 
 	public var dlg:Dialogue;
 	public var coin_counter:CoinCounter;
@@ -74,6 +75,7 @@ class PlayState extends FlxState
 		add(spikes);
 		add(npcs);
 		add(bonfires);
+		add(enemies);
 		add(ducks);
 		add(coins);
 		add(miscFront);
@@ -94,6 +96,7 @@ class PlayState extends FlxState
 		Ctrl.update();
 		FlxG.collide(cols, ducks);
 		FlxG.collide(npcs, cols);
+		FlxG.collide(enemies, cols);
 
 		super.update(elapsed);
 	}

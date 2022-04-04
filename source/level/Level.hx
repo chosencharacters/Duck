@@ -53,6 +53,10 @@ class Level extends LDTKLevel
 			new NPC(entity.pixelX + x, entity.pixelY + y, entity.f_name);
 		for (entity in entities.all_Upgrade.iterator())
 			new Upgrade(entity.pixelX + x, entity.pixelY + y);
+		for (entity in entities.all_Upgrade.iterator())
+			new Toast(entity.pixelX + x, entity.pixelY + y);
+		for (entity in entities.all_Upgrade.iterator())
+			new FlyingToast(entity.pixelX + x, entity.pixelY + y);
 	}
 
 	static function first_to_lowercase(s:String):String

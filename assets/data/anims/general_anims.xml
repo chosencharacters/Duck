@@ -117,6 +117,18 @@
 	<animSet image = "explosion" path = "assets\images\fx">
 		<anim name = "explode" looping = "false">0t11</anim>
 	</animSet>
+
+	<animSet image = "flying-toast" path = "assets\images\enemies">
+		<anim name = "idle">0t3</anim>
+	</animSet>
+
+	<animSet image = "toast" path = "assets\images\enemies">
+		<anim name = "idle" fps = "4">0t1</anim>
+	</animSet>
+
+	<animSet image = "enemy-boom" path = "assets\images\fx">
+		<anim name = "idle" looping = "false">0t3</anim>
+	</animSet>
 </root>
 
 <!---->

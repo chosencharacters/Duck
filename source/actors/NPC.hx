@@ -16,7 +16,6 @@ class NPC extends FlxSpriteExt
 		else
 			loadAllFromAnimationSet('generic_duck');
 
-		trace(name, height);
 		PlayState.self.npcs.add(this);
 		setPosition(x + 8 - width / 2, y + 16 - height);
 	}
