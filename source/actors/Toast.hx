@@ -47,6 +47,7 @@ class Toast extends FlxSpriteExt
 							velocity.x = getMidpoint().x < d.getMidpoint().x ? -100 : 100;
 							d.dash_reset = true;
 							sstate("dying");
+							SoundPlayer.play_sound(AssetPaths.hit__ogg);
 						}
 					}
 			case "dying":
@@ -67,6 +68,7 @@ class Toast extends FlxSpriteExt
 				{
 					var explosion:TempSprite = new TempSprite(getMidpoint().x - 12, getMidpoint().y - 12);
 					explosion.loadAllFromAnimationSet("enemy-boom");
+					SoundPlayer.play_sound(AssetPaths.boom__ogg);
 					PlayState.self.miscFront.add(explosion);
 					PlayState.self.hitStop = 5;
 					sstate("wait-respawn");

@@ -2,7 +2,7 @@ package platforms;
 
 class Upgrade extends FlxSpriteExt
 {
-	var costs:Array<Int> = [10, 50, 150, 600];
+	var costs:Array<Int> = [35, 50, 150, 600];
 	var upgrade_level:Int = 0;
 
 	var talk_cd:Int = 0;
@@ -42,7 +42,7 @@ class Upgrade extends FlxSpriteExt
 	{
 		if (talk_cd < 0)
 		{
-			PlayState.self.dlg.load_text('Quacksmith: Not enough coins m8. Ye need ${costs[upgrade_level]}');
+			PlayState.self.dlg.load_text('Quacksmith: Not enough coins m8. Ye need ${costs[upgrade_level]}.');
 			talk_cd = 120;
 		}
 	}
@@ -66,6 +66,7 @@ class Upgrade extends FlxSpriteExt
 				PlayState.self.dlg.load_text('Quacksmith: Ay, that be Endgame Armor. You can now face anything. Ye should leave already.', true);
 				Lists.setFlagBool("ARMOR_ENDGAME", true);
 		}
+		SoundPlayer.play_sound(AssetPaths.upgrade__ogg);
 		FlxG.camera.flash();
 		PlayState.self.coins_collected -= costs[upgrade_level];
 		PlayState.self.coin_counter.collect();

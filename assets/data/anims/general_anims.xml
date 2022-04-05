@@ -118,6 +118,18 @@
 		<anim name = "idle">0t4</anim>
 	</animSet>
 
+	<animSet image = "dark_duck" path = "assets\images\npcs">
+		<anim name = "idle">0t4</anim>
+	</animSet>
+
+	<animSet image = "rich_duck" path = "assets\images\npcs">
+		<anim name = "idle">0t4</anim>
+	</animSet>
+
+	<animSet image = "sleepy_duck" path = "assets\images\npcs">
+		<anim name = "idle">0t9</anim>
+	</animSet>
+
 	<animSet image = "explosion" path = "assets\images\fx">
 		<anim name = "explode" looping = "false">0t11</anim>
 	</animSet>
@@ -132,6 +144,21 @@
 
 	<animSet image = "enemy-boom" path = "assets\images\fx">
 		<anim name = "idle" looping = "false">0t3</anim>
+	</animSet>
+
+	<animSet image = "ending" path = "assets\images\ui" width = "320" height = "180">
+		<anim name = "idle" looping = "false">0t79</anim>
+	</animSet>
+
+	<animSet image = "intro" path = "assets\images\ui" width = "320" height = "180">
+	</animSet>
+	
+	<animSet image = "credits" path = "assets\images\ui" width = "320" height = "180">
+	</animSet>
+
+	<animSet image = "menu" path = "assets\images\ui" width = "320" height = "180">
+		<anim name = "idle" looping = "false">0</anim>
+		<anim name = "start">2h2,0h2</anim>
 	</animSet>
 </root>
 

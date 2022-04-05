@@ -55,8 +55,16 @@ class NPC extends FlxSpriteExt
 				return "Mal: That bread gives me the creeps. It used to be delicious... now it hurts :(";
 			case "dash_duck":
 				return "Dashy: You can dash diagonal by holding up while dashing.";
+			case "dash_duck_2":
+				return "Smashy: You can dash into enemies... Quack!";
 			case "shopkeeper":
 				return "Duckshu: On second thought, I should've opened my Nothing Shop somewhere else.";
+			case "rich_duck":
+				return "Haughty Duck: Only the richest ducks can walk on spikes, ho ho ho!";
+			case "dark_duck":
+				return "Dark Duck: Long do they slumber... Quack!";
+			case "sleepy_duck":
+				return "Shhh... They are sleeping...";
 			default:
 				return "";
 		}

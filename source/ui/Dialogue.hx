@@ -50,6 +50,8 @@ class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 				{
 					index++;
 					text.text = loaded_text.substr(0, index);
+					if (index % 10 == 1)
+						SoundPlayer.play_sound(AssetPaths.duckspeak__ogg);
 				}
 				else
 				{
@@ -80,7 +82,6 @@ class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 		state = "in";
 		offset.set(0, -FlxG.height / 4);
 		text.text = "";
-		trace(new_text);
 	}
 
 	function collect()

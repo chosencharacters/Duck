@@ -46,10 +46,6 @@ class Duck extends FlxSpriteExt
 
 		sstate("normal");
 
-		Lists.setFlagBool("ARMOR_DASH", true);
-		Lists.setFlagBool("ARMOR_GROUNDPOUND", true);
-		Lists.setFlagBool("ARMOR_SPIKES", true);
-
 		PlayState.self.ducks.add(this);
 		PlayState.self.miscBack.add(coin_collect_hitbox);
 	}
@@ -78,6 +74,7 @@ class Duck extends FlxSpriteExt
 				if (touching_floor)
 				{
 					sstateAnim("ground_pound_land");
+					SoundPlayer.play_sound(AssetPaths.groundpound_land__ogg);
 					Utils.shake("light");
 				}
 			case "ground_pound_land":
@@ -89,6 +86,20 @@ class Duck extends FlxSpriteExt
 				velocity.x = !flipX ? dash_speed : -dash_speed;
 				velocity.y = dash_up ? -dash_speed / 2 : 0;
 				animProtect("dash");
+				if (animation.finished)
+					sstate("normal");
+			case "scared_start":
+				if (isTouching(FlxObject.FLOOR))
+					sstate("scared_walk");
+			case "scared_walk":
+				anim("move");
+				flipX = true;
+				velocity.x = -50;
+				ttick();
+				if (tick > 15)
+					sstate("scared_nope");
+			case "scared_nope":
+				animProtect("nope");
 				if (animation.finished)
 					sstate("normal");
 		}
@@ -105,6 +116,7 @@ class Duck extends FlxSpriteExt
 	{
 		if (hit_stun)
 			return;
+		SoundPlayer.play_sound(AssetPaths.hurt__ogg);
 		Utils.shake("damage");
 		sstateAnim("hit");
 		PlayState.self.hitStop = 5;
@@ -127,6 +139,7 @@ class Duck extends FlxSpriteExt
 		explosion = new TempSprite(x - 30, y - 17);
 		explosion.loadAllFromAnimationSet("explosion");
 		explosion.anim("explode");
+		SoundPlayer.play_sound(AssetPaths.boom__ogg);
 		PlayState.self.miscFront.add(explosion);
 
 		explosion.on_update = function()
@@ -166,6 +179,7 @@ class Duck extends FlxSpriteExt
 		if (GROUND_POUND && ground_poundable)
 		{
 			sstateAnim("ground_pound");
+			SoundPlayer.play_sound(AssetPaths.groundpound__ogg);
 			return;
 		}
 		if (DASH && dashable)
@@ -177,6 +191,7 @@ class Duck extends FlxSpriteExt
 				flipX = true;
 			if (RIGHT)
 				flipX = false;
+			SoundPlayer.play_sound(AssetPaths.dash__ogg);
 			return;
 		}
 		if (RIGHT && !SIT)
@@ -195,7 +210,10 @@ class Duck extends FlxSpriteExt
 		}
 
 		if (!JUMPING && JUMP)
+		{
 			velocity.y = -jumpBoom * (Math.abs(velocity.x) > speed / 2 ? jump_run_rate : 1);
+			SoundPlayer.play_sound(AssetPaths.jump__ogg);
+		}
 
 		if (!JUMPING)
 			if (LEFT || RIGHT)

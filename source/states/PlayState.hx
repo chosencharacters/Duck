@@ -1,4 +1,4 @@
-package;
+package states;
 
 import actors.Duck;
 import flixel.FlxState;
@@ -42,15 +42,25 @@ class PlayState extends FlxState
 
 	var bgs:FlxTypedGroup<FlxBackdrop> = new FlxTypedGroup<FlxBackdrop>();
 
+	public static var tot_time:Int = 0;
+
+	var current_song:String = "";
+
 	override public function create()
 	{
 		super.create();
+
+		FlxG.sound.playMusic(AssetPaths.overworld__ogg, 0);
+		FlxG.sound.playMusic(AssetPaths.underground__ogg, 0);
+
+		tot_time = 0;
 
 		self = this;
 
 		FlxG.game.setFilters([new ShaderFilter(new FlxShader())]);
 		FlxG.game.stage.quality = StageQuality.LOW;
 		FlxG.camera.pixelPerfectRender = true;
+		FlxG.camera.flash(FlxColor.BLACK);
 
 		// add(new FlxText(0, 0, 0, "Duck Safe", 32).screenCenter());
 
@@ -87,16 +97,45 @@ class PlayState extends FlxState
 		bgColor = 0xff87CEEB;
 	}
 
+	var sound_switch_cd:Int = 0;
+
+	function sound_manage()
+	{
+		sound_switch_cd--;
+		if (sound_switch_cd > 0)
+			return;
+
+		for (d in ducks)
+		{
+			if (current_song != "underground" && d.y > 336 - 2)
+			{
+				FlxG.sound.playMusic(AssetPaths.underground__ogg);
+				current_song = "underground";
+				sound_switch_cd = 15;
+			}
+			if (current_song != "overworld" && d.y < 336 + 2)
+			{
+				FlxG.sound.playMusic(AssetPaths.overworld__ogg, 0.5);
+				current_song = "overworld";
+				sound_switch_cd = 15;
+			}
+		}
+	}
+
 	override public function update(elapsed:Float)
 	{
+		sound_manage();
+
 		if (FlxG.keys.anyJustPressed(["R"]))
 			FlxG.resetState();
+
+		tot_time++;
 
 		hitstop_manager();
 
 		Ctrl.update();
 		FlxG.collide(cols, ducks);
-		//FlxG.collide(npcs, cols);
+		// FlxG.collide(npcs, cols);
 		FlxG.collide(enemies, cols);
 
 		super.update(elapsed);

@@ -34,6 +34,7 @@ class Bonfire extends FlxSpriteExt
 		ACTIVE = true;
 		FlxG.camera.flash(FlxColor.ORANGE);
 		Utils.shake("light");
+		SoundPlayer.play_sound(AssetPaths.bonfire__ogg);
 		PlayState.self.active_bonfire = this;
 
 		var bonfire_lit:TempSprite = new TempSprite(0, 0, 90, AssetPaths.bonfire_lit__png);
@@ -56,7 +57,7 @@ class Bonfire extends FlxSpriteExt
 		for (d in PlayState.self.ducks)
 		{
 			velocity.set(0, 0);
-			d.setPosition(x + 28, y + height - d.height - 16);
+			d.setPosition(x + 28, y + height - d.height - 4);
 			nurse.visible = true;
 		}
 	}

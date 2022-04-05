@@ -57,6 +57,8 @@ class Level extends LDTKLevel
 			new Toast(entity.pixelX + x, entity.pixelY + y);
 		for (entity in entities.all_FlyingToast.iterator())
 			new FlyingToast(entity.pixelX + x, entity.pixelY + y);
+		for (entity in entities.all_Exit.iterator())
+			new Exit(entity.pixelX + x, entity.pixelY + y);
 	}
 
 	static function first_to_lowercase(s:String):String

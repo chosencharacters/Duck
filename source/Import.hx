@@ -1,7 +1,6 @@
 import FlxSpriteExt;
 import LdtkProject;
 import Lists;
-import PlayState;
 import Xml;
 import actors.*;
 import actors.Duck;
@@ -17,3 +16,4 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
 import level.*;
 import platforms.*;
+import states.*;

@@ -13,7 +13,7 @@ class Main extends Sprite
 	{
 		super();
 		Lists.init();
-		addChild(new FlxGame(320, 180, PlayState, 1, 60, 60, true));
+		addChild(new FlxGame(320, 180, CreditsState, 1, 60, 60, true));
 		FlxG.mouse.visible = false;
 	}
 }

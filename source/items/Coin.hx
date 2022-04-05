@@ -36,6 +36,7 @@ class Coin extends FlxSpriteExt
 
 	function collect()
 	{
+		SoundPlayer.play_sound(AssetPaths.coin__ogg);
 		anim("collect");
 		collected = true;
 		PlayState.self.coins_collected += value;
