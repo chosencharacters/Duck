@@ -21,7 +21,7 @@ class Bonfire extends FlxSpriteExt
 		for (d in PlayState.self.ducks)
 			if (d.overlaps(this) && !ACTIVE)
 				activate();
-		if (nurse.visible && !isOnScreen())
+		if (nurse.visible && !nurse.isOnScreen())
 			nurse.visible = false;
 		super.update(elapsed);
 	}
@@ -56,8 +56,8 @@ class Bonfire extends FlxSpriteExt
 	{
 		for (d in PlayState.self.ducks)
 		{
-			velocity.set(0, 0);
-			d.setPosition(x + 28, y + height - d.height - 4);
+			d.velocity.set(0, 0);
+			d.setPosition(x + 28, y + height - d.height - 20);
 			nurse.visible = true;
 		}
 	}

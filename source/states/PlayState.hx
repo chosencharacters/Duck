@@ -53,6 +53,8 @@ class PlayState extends FlxState
 		FlxG.sound.playMusic(AssetPaths.overworld__ogg, 0);
 		FlxG.sound.playMusic(AssetPaths.underground__ogg, 0);
 
+		Lists.init();
+
 		tot_time = 0;
 
 		self = this;
