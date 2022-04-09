@@ -4,7 +4,9 @@ import actors.Duck;
 import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
 import flixel.effects.particles.FlxEmitter;
+import flixel.graphics.frames.FlxBitmapFont;
 import flixel.system.FlxAssets.FlxShader;
+import flixel.text.FlxBitmapText;
 import items.Coin;
 import level.Level;
 import openfl.display.StageQuality;
@@ -72,6 +74,7 @@ class PlayState extends FlxState
 		for (lvl in lvls)
 			FlxG.camera.maxScrollX = lvl.x + lvl.width > FlxG.camera.maxScrollX ? lvl.x + lvl.width : FlxG.camera.maxScrollX;
 		FlxG.camera.minScrollX = 0;
+		FlxG.camera.minScrollY = 0;
 
 		FlxG.camera.follow(ducks.getFirstAlive());
 		FlxG.camera.targetOffset.set(0, -32);
@@ -97,6 +100,19 @@ class PlayState extends FlxState
 		add(coin_counter = new CoinCounter());
 
 		bgColor = 0xff87CEEB;
+
+		var monospaceLetters:String = " !\"#$%&'()*+,-.\\0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+		var charSize = FlxPoint.get(7, 10);
+		var fontMonospace = FlxBitmapFont.fromMonospace("assets/fonts/RetroMedievalV3.png", monospaceLetters, charSize);
+		var text:FlxBitmapText = new FlxBitmapText(fontMonospace);
+		text.scrollFactor.set(0, 0);
+		text.setPosition(0, 100);
+		text.autoSize = false;
+		text.width = text.fieldWidth = 84;
+		text.letterSpacing = -1;
+		text.multiLine = true;
+		text.text = "123456789";
+		add(text);
 	}
 
 	var sound_switch_cd:Int = 0;
@@ -128,8 +144,8 @@ class PlayState extends FlxState
 	{
 		sound_manage();
 
-		if (FlxG.keys.anyJustPressed(["R"]))
-			FlxG.resetState();
+		// if (FlxG.keys.anyJustPressed(["R"]))
+		// FlxG.resetState();
 
 		tot_time++;
 
@@ -140,6 +156,9 @@ class PlayState extends FlxState
 		// FlxG.collide(npcs, cols);
 		FlxG.collide(enemies, cols);
 
+		var text:FlxBitmapText;
+		text = new FlxBitmapText(FlxBitmapFont.fromMonospace(AssetPaths.RetroMedievalV3__png, FlxBitmapFont.DEFAULT_CHARS, FlxPoint.get(8, 8)));
+
 		super.update(elapsed);
 	}
 
@@ -149,6 +168,4 @@ class PlayState extends FlxState
 			g.active = hitStop <= 0;
 		hitStop--;
 	}
-
-	function create_level() {}
 }
