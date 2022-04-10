@@ -73,7 +73,8 @@ class NPC extends FlxSpriteExt
 	function nurse_quips()
 	{
 		return "Nurse Duck: " + FlxG.random.getObject([
-			"Tough break getting killed in the first town. But no medical care is too good for our Hero!",
+			"Tough break getting killed in the first town.",
+			"No medical care is too good for our Hero!",
 			"Our Hero should be a lot more careful!",
 			"Really be careful around spikes and other stuff that hurts, Hero!"
 		]);

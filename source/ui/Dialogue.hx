@@ -1,10 +1,16 @@
 package ui;
 
+import flixel.graphics.frames.FlxBitmapFont;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.text.FlxBitmapText;
 
 class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 {
+	#if html5
+	var text:FlxBitmapText;
+	#else
 	var text:FlxText;
+	#end
 	var bg:FlxSpriteExt;
 
 	var loaded_text:String = "";
@@ -23,8 +29,24 @@ class Dialogue extends FlxTypedSpriteGroup<FlxSprite>
 	{
 		super(X, Y);
 		bg = new FlxSpriteExt(AssetPaths.dialogue__png);
+
+		#if html5
+		var charSize = FlxPoint.get(7, 10);
+		var monospaceLetters:String = " !\"#$%&'()*+,-.\\0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+		var fontMonospace = FlxBitmapFont.fromMonospace("assets/fonts/RetroMedievalV3.png", monospaceLetters, charSize);
+		text = new FlxBitmapText(fontMonospace);
+		text.scrollFactor.set(0, 0);
+		text.setPosition(9 + 2, 152);
+		text.autoSize = false;
+		text.width = text.fieldWidth = 302;
+		text.letterSpacing = -1;
+		text.multiLine = true;
+		text.text = "123456789";
+		text.color = 0x503737;
+		#else
 		text = new FlxText(9, 152 - 6, 302);
 		text = Utils.formatText(text, "left", 0xff503737, false, "assets/fonts/RetroMedievalV3.ttf", 16);
+		#end
 
 		add(bg);
 		add(text);

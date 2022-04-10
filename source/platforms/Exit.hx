@@ -10,7 +10,7 @@ class Exit extends FlxSpriteExt
 		makeGraphic(16, 999);
 		visible = false;
 		immovable = true;
-		PlayState.self.miscBack.add(this);
+		PlayState.self.miscFront.add(this);
 	}
 
 	override function update(elapsed:Float)

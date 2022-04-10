@@ -1,10 +1,17 @@
 package ui;
 
+import flixel.graphics.frames.FlxBitmapFont;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.text.FlxBitmapText;
 
 class CoinCounter extends FlxTypedSpriteGroup<FlxSprite>
 {
+	#if html5
+	var text:FlxBitmapText;
+	#else
 	var text:FlxText;
+	#end
+
 	var coin:FlxSpriteExt;
 
 	var shake_tick:Int = 0;
@@ -17,8 +24,22 @@ class CoinCounter extends FlxTypedSpriteGroup<FlxSprite>
 		coin.loadAllFromAnimationSet("coin_gold");
 		coin.anim("spin_once");
 
+		#if html5
+		var charSize = FlxPoint.get(7, 9);
+		var monospaceLetters:String = " 0123456789:x";
+		var fontMonospace = FlxBitmapFont.fromMonospace("assets/fonts/CounterText.png", monospaceLetters, charSize);
+		text = new FlxBitmapText(fontMonospace);
+		text.scrollFactor.set(0, 0);
+		text.setPosition(coin.x + 9, coin.y);
+		text.autoSize = false;
+		text.width = text.fieldWidth = 302;
+		text.letterSpacing = -1;
+		text.multiLine = true;
+		text.text = "x000";
+		#else
 		text = new FlxText(coin.x + 6, coin.y - 6, 302, "x000");
 		text = Utils.formatText(text, "left", FlxColor.BLACK, true, "assets/fonts/RetroMedievalV3.ttf", 16);
+		#end
 
 		add(coin);
 		add(text);

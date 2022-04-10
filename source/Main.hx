@@ -9,6 +9,8 @@ class Main extends Sprite
 
 	public static var REVERSE_MENU_CONTROLS:Bool = false;
 
+	public static var USE_BITMAP_FONTS:Bool = false;
+
 	public function new()
 	{
 		super();

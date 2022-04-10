@@ -4,6 +4,8 @@ import actors.Duck;
 import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
 import flixel.effects.particles.FlxEmitter;
+import flixel.graphics.frames.FlxBitmapFont;
+import flixel.group.FlxGroup;
 import flixel.system.FlxAssets.FlxShader;
 import items.Coin;
 import level.Level;
@@ -12,6 +14,7 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import ui.CoinCounter;
 import ui.Dialogue;
+import ui.Timer;
 
 class PlayState extends FlxState
 {
@@ -45,6 +48,8 @@ class PlayState extends FlxState
 	public static var tot_time:Int = 0;
 
 	var current_song:String = "";
+
+	var timer:Timer;
 
 	override public function create()
 	{
@@ -95,8 +100,41 @@ class PlayState extends FlxState
 		add(emitters);
 		add(dlg = new Dialogue());
 		add(coin_counter = new CoinCounter());
+		add(timer = new Timer());
+		timer.y -= 16 * 10;
 
 		bgColor = 0xff87CEEB;
+	}
+
+	override public function update(elapsed:Float)
+	{
+		sound_manage();
+		optimize();
+
+		// if (FlxG.keys.anyJustPressed(["R"]))
+		// FlxG.resetState();
+
+		if (FlxG.keys.anyJustPressed(["T"]))
+			timer.flicker();
+
+		tot_time++;
+
+		hitstop_manager();
+
+		Ctrl.update();
+		FlxG.collide(cols, ducks);
+		FlxG.collide(enemies, cols);
+
+		super.update(elapsed);
+	}
+
+	function optimize()
+	{
+		for (g in [spikes, npcs, bonfires, coins, miscFront])
+			for (c in (cast g : FlxGroup))
+				c.active = cast(c, FlxSprite).isOnScreen();
+		for (c in lvls)
+			c.active = c.isOnScreen();
 	}
 
 	var sound_switch_cd:Int = 0;
@@ -122,25 +160,6 @@ class PlayState extends FlxState
 				sound_switch_cd = 15;
 			}
 		}
-	}
-
-	override public function update(elapsed:Float)
-	{
-		sound_manage();
-
-		if (FlxG.keys.anyJustPressed(["R"]))
-			FlxG.resetState();
-
-		tot_time++;
-
-		hitstop_manager();
-
-		Ctrl.update();
-		FlxG.collide(cols, ducks);
-		// FlxG.collide(npcs, cols);
-		FlxG.collide(enemies, cols);
-
-		super.update(elapsed);
 	}
 
 	function hitstop_manager()
