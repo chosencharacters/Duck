@@ -274,6 +274,11 @@ class Utils
 		if (old_position.x != object.x || old_position.y != object.y)
 			trace('New \'{$name}\' position: (${pos.x} , ${pos.y})');
 	}
+
+	public static function loadAssistString(path:String):String
+	{
+		return openfl.Assets.getText(path);
+	}
 }
 
 /**

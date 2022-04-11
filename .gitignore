@@ -1,3 +1,4 @@
 export
 dump
 .DS_Store
+assets/data/config/ng_api/ng_secrets.json

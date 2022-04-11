@@ -25,6 +25,10 @@ class EndState extends FlxState
 
 		add(timer = new Timer());
 		timer.y -= 16 * 10;
+
+		#if newgrounds
+		NewgroundsHandler.post_score(PlayState.tot_time, 11730);
+		#end
 	}
 
 	override function update(elapsed:Float)

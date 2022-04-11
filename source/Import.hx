@@ -17,3 +17,7 @@ import flixel.util.FlxColor;
 import level.*;
 import platforms.*;
 import states.*;
+#if newgrounds
+import ng.NGMedalPopup;
+import ng.NewgroundsHandler;
+#end

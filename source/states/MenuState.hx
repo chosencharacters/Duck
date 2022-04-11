@@ -1,6 +1,7 @@
 package states;
 
 import flixel.FlxState;
+import ng.NGMedalPopup.NGMedalPopUp;
 
 class MenuState extends FlxState
 {

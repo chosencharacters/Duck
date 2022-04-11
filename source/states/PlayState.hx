@@ -104,6 +104,8 @@ class PlayState extends FlxState
 		timer.y -= 16 * 10;
 
 		bgColor = 0xff87CEEB;
+
+		trace(Main.NG_LOGGED_IN);
 	}
 
 	override public function update(elapsed:Float)
